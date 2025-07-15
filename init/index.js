@@ -3,8 +3,8 @@ const initData = require("./data.js");
 // const initData = require("./zindex.data.js");
 const Listing = require("../models/listing.js");
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-const MONGO_URL = `mongodb+srv://wanderlust_User:dsDjJBlZSbo7f3X9@cluster0.pjvxxpb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// Insert org dbs url
 
 
 

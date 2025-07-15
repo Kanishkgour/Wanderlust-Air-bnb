@@ -1,2 +1,33 @@
-.env
+# 🛠 Node dependencies
 node_modules/
+
+# 🔐 Environment configuration
+.env
+.env.*   # Covers .env.local, .env.production, etc.
+
+# 📦 Build output
+dist/
+build/
+
+# 📁 Logs
+npm-debug.log*
+
+# 💻 System files
+.DS_Store
+Thumbs.db
+
+# 🧠 IDE/editor settings
+.vscode/
+.idea/
+
+# 🧪 Test coverage
+coverage/
+
+# ⚙️ Temporary files
+tmp/
+temp/
+
+# 🔧 Optional configs
+config/local.js
+config/*.local.js
+
