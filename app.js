@@ -1,5 +1,5 @@
 //--------------------------- DANGER--------------------------- NOT SHARE TO ANYONE---------------------------|
-if(process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV != "production") {
     require('dotenv').config();
 }
 //--------------------------- DANGER--------------------------- NOT SHARE TO ANYONE---------------------------|
@@ -20,7 +20,7 @@ const listingsRouter = require("./routes/listing.js")
 const reviewsRouter = require("./routes/review.js")
 const userRouter = require("./routes/user.js")
 
-const dbUrl = process.env.ATLASDB_URL ;
+const dbUrl = process.env.ATLASDB_URL;
 
 main()
     .then(() => {
@@ -45,19 +45,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 app.engine('ejs', ejsMate)
 app.use(express.static(path.join(__dirname, '/public')))
-.69
+
 const store = MongoStore.create({
-    mongoUrl : dbUrl,
-    crypto : {
+    mongoUrl: dbUrl,
+    crypto: {
         secret: process.env.SECRET,
     },
-    touchAfter : 24 * 3600 , //pass informations in seconds not millisecond
+    touchAfter: 24 * 3600, //pass informations in seconds not millisecond
 })
-store.on("error" , () => {
+store.on("error", () => {
     console.log("ERROR in MONGO SESSION STORE ")
 })
 const sessionOptions = {
-    store : store,
+    store: store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
@@ -86,13 +86,14 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash("success")
     res.locals.error = req.flash("error")
-    res.locals.curruser = req.user
+    res.locals.curruser = req.user || null;
     next();
 });
 
+
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter)
-app.use("/" , userRouter);
+app.use("/", userRouter);
 
 
 app.all("*", (req, res, next) => {
@@ -101,7 +102,7 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went Wrong" } = err;
-    res.render("listings/error.ejs", { message , err })
+    res.render("listings/error.ejs", { message, err })
 });
 
 app.listen(8080, () => {
